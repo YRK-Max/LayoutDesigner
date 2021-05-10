@@ -11,7 +11,7 @@
                   :transform="'translate('+(item.svgPositionX)+','+(item.svgPositionY)+')' +'rotate('+item.angle+')'"
                   :class="item.class"
               >
-                <SvgComponents :height = item.height :color= item.svgColor :width= item.width :type= item.type :tableData= item.tableData :fontSize= item.fontSize :svgText= item.svgText :editable= editable></SvgComponents>
+                <SvgComponents :stroke-color="item.strokeColor" :height = item.height :color= item.svgColor :width= item.width :type= item.type :tableData= item.tableData :fontSize= item.fontSize :svgText= item.svgText :editable= editable></SvgComponents>
               </g>
           </svg>
         </div>

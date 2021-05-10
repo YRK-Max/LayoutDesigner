@@ -27,7 +27,6 @@ export default {
     data(){
     return{
       svgLists:[],
-      analogDataTimer:'',//模拟数据定时器
       userInfo:'',
       editable:false
   }},

@@ -61,7 +61,7 @@ export default {
           type: 'PortSvg',
           color: '#DDDDDD',
           height: 40,
-          fontSize: 0,
+          fontSize: 15,
           width: 2,
           imageSrc: 'port',
           text: ''
@@ -73,7 +73,7 @@ export default {
           type: 'CleanerSvg',
           color: '#DDDDDD',
           height: 200,
-          fontSize: 0,
+          fontSize: 15,
           width: 2,
           imageSrc: 'cleaner',
           text: ''
@@ -83,7 +83,7 @@ export default {
           type: 'CutSvg',
           color: '#DDDDDD',
           height: 200,
-          fontSize: 0,
+          fontSize: 15,
           width: 2,
           imageSrc: 'cut',
           text: ''
@@ -95,7 +95,7 @@ export default {
           type: 'PortSvg',
           color: '#DDDDDD',
           height: 40,
-          fontSize: 0,
+          fontSize: 15,
           width: 2,
           imageSrc: 'port',
           text: ''

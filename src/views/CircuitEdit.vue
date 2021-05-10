@@ -5,8 +5,21 @@
       <a-layout>
         <!-- {{tableDefaultData}} -->
         <a-layout-header style="padding-left: 13px; display: flex; align-items: center">
-          <a-button type="primary" @click="testD" style="margin-right: 10px">导出数据</a-button>
-          <a-button type="primary" @click="testE" style="margin-right: 10px">载入模板</a-button>
+          <a-dropdown placement="bottomLeft">
+            <template #overlay>
+              <a-menu @click="testD">
+                <a-menu-item key="SVG">
+                  导出 SVG
+                </a-menu-item>
+                <a-menu-item key="JSON">
+                  导出 JSON
+                </a-menu-item>
+              </a-menu>
+            </template>
+            <a-button type="primary" style="margin-right: 10px">
+              导出数据
+            </a-button>
+          </a-dropdown>
           <a-button type="primary" @click="testH" style="margin-right: 10px">预览</a-button>
         </a-layout-header>
         <span v-if="shrink" @click="fullScreen" class="icon-shrink svgfont">&#xe648;</span>
@@ -41,7 +54,7 @@
                 >
                   <SvgComponents :height=item.height :color=item.svgColor :width=item.width :type=item.type
                                  :tableData=item.tableData :fontSize=item.fontSize :svgText=item.svgText
-                                 :editable=editable></SvgComponents>
+                                 :editable=editable :stroke-color="item.strokeColor"></SvgComponents>
                 </g>
               </svg>
             </div>
@@ -210,7 +223,6 @@ export default {
     },
     MousedownCanvas() {
       //console.log('点击了画布');
-
     },
     MousedownSvg(id, index) {
       global.CurrentlySelectedToolBarType = '';
@@ -251,6 +263,8 @@ export default {
       }
     },
     DblClick() {
+      let svg_ele = document.getElementById('main_svg')
+      console.log(svg_ele);
       //获取所有g标签 清除所有选中样式
       let gAnyList = document.querySelectorAll('g');
       gAnyList.forEach(g => {
@@ -258,15 +272,13 @@ export default {
       });
       this.selectSvgInfo = '';
     },
-    testD() {
-      let svg_ele = document.getElementById('main_svg')
-      console.log(svg_ele.outerHTML);
-      alert(svg_ele.outerHTML)
-      // console.log(JSON.stringify(this.svgLists));
-      // alert(JSON.stringify(this.svgLists));
-    },
-    testE() {
-      this.svgLists = global.AnalogData;
+    testD(data) {
+      if(data.key === 'SVG') {
+        let svg_ele = document.getElementById('main_svg')
+        alert(svg_ele.outerHTML)
+      }else if(data.key === 'JSON') {
+        alert(JSON.stringify(this.svgLists));
+      }
     },
     testH() {
       localStorage.setItem('svginfo', JSON.stringify(this.svgLists));
@@ -361,6 +373,7 @@ export default {
         svgPositionY: e.offsetY,
         height: _this.CurrentlySelectedToolBarHeight,
         width: _this.CurrentlySelectedToolBarWidth,
+        strokeColor: '#000000',
         fontSize: _this.CurrentlySelectedToolBarFontSize,
         svgText: _this.CurrentlySelectedToolBarText,
         tableRowCount: _this.tableRowCount,

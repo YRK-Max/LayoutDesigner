@@ -1,50 +1,95 @@
 <template>
-<a-tabs type="card"  class="components-layout-right">
+  <a-tabs type="card" class="components-layout-right">
     <a-tab-pane key="1" tab="外观">
-      <a-form layout="horizontal">
+      <a-form layout="horizontal" :label-col="{ span: 7 }" :wrapper-col="{ span: 16 }" label-align="left">
         <a-form-item label="id">
-          <p>{{svgInfo.id}}</p>
+          <p>{{ svgInfo.id }}</p>
         </a-form-item>
         <a-form-item label="类型">
-          <p>{{selectSvgInfo.typeName}}</p>
+          <p>{{ selectSvgInfo.typeName }}</p>
         </a-form-item>
-        <a-form-item label="名称">
-          <a-input v-model:value="selectSvgInfo.title" placeholder="请输入组件名称" />
+        <a-form-item v-if="svgInfo" label="名称">
+          <a-input style="width: 100%" v-model:value="selectSvgInfo.title" placeholder="请输入组件名称"/>
         </a-form-item>
-        <a-form-item label="Class">
-          <a-input v-model:value="selectSvgInfo.class" placeholder="请输入组件class" @pressEnter="handlerAddClass" />
+        <a-form-item v-if="svgInfo" label="Class">
+          <a-input style="width: 100%" v-model:value="selectSvgInfo.class" placeholder="请输入组件class" @pressEnter="handlerAddClass"/>
         </a-form-item>
-        <a-form-item label="X轴坐标">
-          <a-input-number v-model:value="selectSvgInfo.svgPositionX" :min="0" :max="1920"/>
+        <a-form-item v-if="svgInfo" label="X轴坐标">
+          <a-row style="width: 100%">
+            <a-col :span="16">
+              <a-slider v-model:value="selectSvgInfo.svgPositionX" :min="0" :max="1920"/>
+            </a-col>
+            <a-col :span="7">
+              <a-input-number style="width: 100%" v-model:value="selectSvgInfo.svgPositionX" :min="0" :max="1920" />
+            </a-col>
+          </a-row>
         </a-form-item>
-        <a-form-item label="Y轴坐标">
-          <a-input-number v-model:value="selectSvgInfo.svgPositionY" :min="0" :max="1080"/>
+        <a-form-item v-if="svgInfo" label="Y轴坐标">
+          <a-row style="width: 100%">
+            <a-col :span="16">
+              <a-slider v-model:value="selectSvgInfo.svgPositionY" :min="0" :max="1080"/>
+            </a-col>
+            <a-col :span="7">
+              <a-input-number style="width: 100%" v-model:value="selectSvgInfo.svgPositionY" :min="0" :max="1080" />
+            </a-col>
+          </a-row>
         </a-form-item>
-        <a-form-item label="颜色">
-          <input type="color" v-model="selectSvgInfo.svgColor">
+        <a-form-item v-if="svgInfo" label="颜色">
+          <input style="width: 100%" type="color" v-model="selectSvgInfo.svgColor">
         </a-form-item>
-        <a-form-item label="大小">
-          <a-input-number v-model:value="selectSvgInfo.height" :min="1" :max="3000"/>
+        <a-form-item v-if="svgInfo" label="大小">
+          <a-row style="width: 100%">
+            <a-col :span="16">
+              <a-slider v-model:value="selectSvgInfo.height" :min="1" :max="500"/>
+            </a-col>
+            <a-col :span="7">
+              <a-input-number style="width: 100%" v-model:value="selectSvgInfo.height" :min="1" :max="500" />
+            </a-col>
+          </a-row>
         </a-form-item>
-        <a-form-item label="宽度">
-          <a-input-number v-model:value="selectSvgInfo.width" :min="1" :max="3000"/>
+        <a-form-item v-if="svgInfo" label="描边宽度">
+          <a-row style="width: 100%">
+            <a-col :span="16">
+              <a-slider v-model:value="selectSvgInfo.width" :min="1" :max="12"/>
+            </a-col>
+            <a-col :span="7">
+              <a-input-number style="width: 100%" v-model:value="selectSvgInfo.width" :min="1" :max="12"/>
+            </a-col>
+          </a-row>
         </a-form-item>
-        <a-form-item label="旋转">
-          <a-input-number v-model:value="selectSvgInfo.angle" :min="0" :max="360"/>
+        <a-form-item v-if="svgInfo" label="描边颜色">
+          <input type="color" style="width: 100%" v-model="selectSvgInfo.strokeColor">
         </a-form-item>
-        <a-form-item label="文本">
-          <a-input v-model:value="selectSvgInfo.svgText" placeholder="请输入文本" />
+        <a-form-item v-if="svgInfo" label="旋转">
+          <a-row style="width: 100%">
+            <a-col :span="16">
+              <a-slider v-model:value="selectSvgInfo.angle" :min="0" :max="360"/>
+            </a-col>
+            <a-col :span="7">
+              <a-input-number style="width: 100%" v-model:value="selectSvgInfo.angle" :min="0" :max="360"/>
+            </a-col>
+          </a-row>
         </a-form-item>
-        <a-form-item label="字体大小">
-          <a-input-number v-model:value="selectSvgInfo.fontSize" :min="1" :max="500"/>
+        <a-form-item v-if="svgInfo" label="文本">
+          <a-input style="width: 100%" v-model:value="selectSvgInfo.svgText" placeholder="请输入文本"/>
         </a-form-item>
-        <a-form-item label="表格行数">
+        <a-form-item v-if="svgInfo" label="字体大小">
+          <a-row style="width: 100%">
+            <a-col :span="16">
+              <a-slider v-model:value="selectSvgInfo.fontSize" :min="11" :max="30"/>
+            </a-col>
+            <a-col :span="7">
+              <a-input-number style="width: 100%" v-model:value="selectSvgInfo.fontSize" :min="11" :max="30"/>
+            </a-col>
+          </a-row>
+        </a-form-item>
+        <a-form-item v-if="selectSvgInfo.type==='table'" label="表格行数">
           <a-input-number v-model:value="selectSvgInfo.tableRowCount" :min="1" :max="500"/>
         </a-form-item>
-        <a-form-item label="表格列数">
+        <a-form-item v-if="selectSvgInfo.type==='table'" label="表格列数">
           <a-input-number v-model:value="selectSvgInfo.tableColCount" :min="1" :max="500"/>
         </a-form-item>
-        <a-form-item>
+        <a-form-item v-if="svgInfo">
           <a-button type="primary" class="btn-sure">
             确定
           </a-button>
@@ -52,7 +97,7 @@
       </a-form>
     </a-tab-pane>
     <a-tab-pane key="2" tab="数据">
-      <div class="bg-code">{{selectSvgInfo}}</div>
+      <div class="bg-code">{{ selectSvgInfo }}</div>
     </a-tab-pane>
   </a-tabs>
 
@@ -60,17 +105,17 @@
 <script>
 export default {
   props: ['svgInfo'],
-  computed:{
-    selectSvgInfo(){
+  computed: {
+    selectSvgInfo() {
       return this.svgInfo;
     }
   },
-  watch:{
-    'selectSvgInfo.tableRowCount':function(newVal){
-      this.$emit('setTableAttr', this.selectSvgInfo.id,newVal,this.selectSvgInfo.tableColCount)
+  watch: {
+    'selectSvgInfo.tableRowCount': function (newVal) {
+      this.$emit('setTableAttr', this.selectSvgInfo.id, newVal, this.selectSvgInfo.tableColCount)
     },
-    'selectSvgInfo.tableColCount':function(newVal){
-      this.$emit('setTableAttr', this.selectSvgInfo.id,this.selectSvgInfo.tableRowCount,newVal)
+    'selectSvgInfo.tableColCount': function (newVal) {
+      this.$emit('setTableAttr', this.selectSvgInfo.id, this.selectSvgInfo.tableRowCount, newVal)
     }
   },
   methods: {
@@ -82,30 +127,35 @@ export default {
 };
 </script>
 <style lang="less">
-.components-layout-right{
-  .ant-tabs-bar{
+.components-layout-right {
+  margin-left: 10px;
+
+  .ant-tabs-bar {
     margin-bottom: 0 !important;
   }
-  .ant-form-item-label{
+
+  .ant-form-item-label {
     width: 100px !important;
     flex-shrink: 0;
   }
-  .ant-input-number,input{
+
+  .ant-input-number, input {
     width: 160px;
     border-radius: 4px;
     border-color: #ddd;
   }
-  .ant-form-item-control{
+
+  .ant-form-item-control {
     line-height: 24px !important;
 
-    p{
+    p {
       margin-bottom: 0 !important;
     }
 
 
   }
 
-  .ant-form-item{
+  .ant-form-item {
     display: flex;
     align-items: center;
     flex-flow: nowrap;
@@ -113,8 +163,8 @@ export default {
     margin-bottom: 0;
     padding: 8px 0;
 
-    &:after{
-      content:"";
+    &:after {
+      content: "";
       position: absolute;
       bottom: 0;
       left: 15px;
@@ -124,18 +174,19 @@ export default {
       background: #f2f2f2;
     }
 
-    &:last-child::after{
-      content:unset
+    &:last-child::after {
+      content: unset
     }
   }
 }
 </style>
 <style scoped lang="less">
-.btn-sure{
+.btn-sure {
   width: 260px;
   margin: 20px;
 }
-.bg-code{
+
+.bg-code {
   background: #444;
   color: #fff;
   width: calc(100% - 20px);

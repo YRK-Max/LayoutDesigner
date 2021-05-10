@@ -1,7 +1,7 @@
 <!-- 箭头向下svg组件 -->
 <template>
   <Cleaner :height = height :color= color :stroke-color="strokeColor" :width= width :text="svgText" :font-size="fontSize" v-if="type==='CleanerSvg'"></Cleaner>
-  <port :height = height :color= color :stroke-color="strokeColor" :width= width v-else-if="type==='PortSvg'"></port>
+  <port :height = height :color= color :stroke-color="strokeColor" :width= width :text="svgText" :font-size="fontSize" v-else-if="type==='PortSvg'"></port>
   <Cut :height = height :color= color :stroke-color="strokeColor" :width= width :text="svgText" :font-size="fontSize" v-else-if="type==='CutSvg'"></Cut>
 </template>
 <script>

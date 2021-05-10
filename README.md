@@ -1,5 +1,5 @@
 # LayoutDesigner(svg editor)
-基于 vue3.0 开发的，可以自定义拖入的图形，实现拖拽绘制设备layout
+基于 vue3.0 开发的，可以自定义拖入的图形，实现拖拽绘制设备layout, 基于（https://github.com/yaolunmao/vue-webtopo-svgeditor.git）改的。
 
 预览地址
 https://www.rongkun.site:3000/

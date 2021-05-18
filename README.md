@@ -5,7 +5,8 @@
 https://www.rongkun.site:3000/
 
 ### 预览效果
-![image](https://user-images.githubusercontent.com/26423565/117627326-a1ada300-b1aa-11eb-9472-0db1086efc51.png)
+![image](https://user-images.githubusercontent.com/26423565/118579459-b5679380-b7c0-11eb-86ad-967d6bff75b1.png)
+
 
 ### 相关操作
 * 鼠标左键选中组件 按住可拖动至画布
